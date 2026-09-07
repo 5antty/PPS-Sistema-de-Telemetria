@@ -27,7 +27,7 @@
 #include "DHT.h"
 
 // ─── Configuración del DHT11 ──────────────────────────────────────────────────
-#define DHTPIN  32        // GPIO conectado al pin DATA del DHT11
+#define DHTPIN  13        // GPIO conectado al pin DATA del DHT11
                           // Cambiarlo según tu cableado (pines libres en V2:
                           // 13, 17, 22, 23, etc.)
 #define DHTTYPE DHT11
@@ -45,11 +45,11 @@ float humidity    = 0.0;
 uint8_t appEui[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 // DevEUI: identificador único del dispositivo (LSB first en algunos servidores)
 //70B3D57ED00778A6
-uint8_t devEui[] = {0x70, 0xB3, 0xD5, 0x7E, 0xD0, 0x07, 0x7A, 0x6B};
+uint8_t devEui[] = {0x70, 0xB3, 0xD5, 0x7E, 0xD0, 0x07, 0x8B, 0xC0};
 
 // AppKey: clave de cifrado de 16 bytes
 //7A 84 28 EC 40 C8 58 24 0E 62 AA CB F7 83 DD 85
-uint8_t appKey[] = {0x97, 0x77, 0x89, 0x17, 0x00, 0x01, 0x2B, 0xC6, 0x56, 0x62, 0x5F, 0xD4, 0xC4, 0x75, 0xF2, 0x83 };
+uint8_t appKey[] = {0xD5, 0x6B, 0x0D, 0xC1, 0x5E, 0x6A, 0x29, 0xA9, 0x6B, 0xA8, 0x98, 0x2D, 0xB1, 0x32, 0x65, 0x33};
 
 /* Parámetros ABP (no se usan en OTAA, pero la librería los requiere declarados) */
 uint8_t nwkSKey[] = {0x35, 0x5F, 0xC1, 0x1E, 0x19, 0x11, 0x81, 0x1D, 0x11, 0xF7, 0xE4, 0x7D, 0x21, 0x46, 0x2B, 0xE6};
@@ -66,7 +66,7 @@ DeviceClass_t loraWanClass = CLASS_A;
 
 uint32_t appTxDutyCycle = 15000; // Intervalo entre envíos en ms (mínimo recomendado: 15000)
 
-bool overTheAirActivation = false; // ← OTAA desactivado
+bool overTheAirActivation = true; // ← OTAA desactivado
 
 bool loraWanAdr = true;           // Adaptive Data Rate habilitado
 
