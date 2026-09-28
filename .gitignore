@@ -1,10 +1,10 @@
 # Ignorar todo el contenido de la carpeta de datos de Node-RED
-./docker/nodered/data/*
+docker/nodered/data/*
 
 # Hacer la excepción para que SÍ trackee el archivo package.json
-!./docker/nodered/data/package.json
+!docker/nodered/data/package.json
 
 # Guardar flujos exportados en formato JSON
-!./docker/nodered/data/flows.json
+!docker/nodered/data/flows.json
 
-./docker/influxdb/
+docker/influxdb/*
