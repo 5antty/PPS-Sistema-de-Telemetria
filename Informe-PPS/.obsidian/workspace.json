@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Gateway.md",
+                "file": "d.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Gateway"
+              "title": "d"
             }
           }
         ]
@@ -187,8 +187,9 @@
   },
   "active": "d5542304536edc23",
   "lastOpenFiles": [
-    "Puesta en marcha del nodo Heltec WiFi LoRa 32 V2.md",
     "Gateway.md",
+    "d.md",
+    "Puesta en marcha del nodo Heltec WiFi LoRa 32 V2.md",
     "Pasted image 20260703125116.png",
     "Pasted image 20260703124707.png",
     "Pasted image 20260703124453.png",

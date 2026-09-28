@@ -5,7 +5,7 @@ Por defecto el gateway esta en modo Access Point, el cual nos permite conectarno
 Una vez accedido a la web de configuracion del gateway, se debe acceder al apartado Network, y ahi seleccionar WiFi. El canal se deja en automatico, pero el modo se cambia a Client, para que el gateway sea un cliente mas de la red en la que se conecta para tener acceso a internet.
 ![[Pasted image 20260703120920.png|717]]
 
-Selecciono la SSID de la red WiFi, coloco el tipo de encriptacion que tiene y luego la contraseña. El protocolo que se usa es DHCP para que le asigne al Gateway un IP en la red, se usa el servidor DNS de la red, y no se sobreescribe el MTU.
+Selecciono la SSID de la red WiFi, coloco el tipo de encriptacion que tiene y luego la contraseña. El protocolo que se usa es DHCP para que le asigne al Gateway un IP en la red, se usa el servidor DNS de la red, y no se sobreescribe el MTU. Para encontrar la IP del gateway una vez se haya cambiado a modo cliente se puede usar el comand nmap -sn (bloque de red) para mostrar las ip conectadas a esa red, y se puede saber cual es la ip del gateway buscando la MAC del mismo. 
 ## Plan de canal/sub-banda
 En el apartado Channel Plan hay que decirle al gateway que
 - utilice la region que se utiliza en argentina para LoRa que es AU915-928, 

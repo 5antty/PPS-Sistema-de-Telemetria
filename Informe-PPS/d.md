@@ -1,0 +1,1 @@
+tuve que activare el subsistema para windows

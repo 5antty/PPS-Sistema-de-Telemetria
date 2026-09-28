@@ -1,0 +1,260 @@
+[
+    {
+        "id": "12e532b125237eb5",
+        "type": "tab",
+        "label": "Flujo IoT-Practica2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "aaadf36d4618a10a",
+        "type": "mqtt-broker",
+        "name": "server local mqtt",
+        "broker": "mosquitto",
+        "port": 1883,
+        "clientid": "nodered",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b8d94657bc74487c",
+        "type": "influxdb",
+        "hostname": "influxdb",
+        "port": 8086,
+        "protocol": "http",
+        "database": "sensores",
+        "name": "influxdb-docker",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "087e51f23a373618",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    },
+    {
+        "id": "7a5bd77664e270e5",
+        "type": "websocket-listener",
+        "path": "/ws/datos",
+        "wholemsg": "false"
+    },
+    {
+        "id": "f122233fb61e7a29",
+        "type": "websocket-listener",
+        "path": "/ws/control",
+        "wholemsg": "false"
+    },
+    {
+        "id": "1132bf909125edb0",
+        "type": "mqtt-broker",
+        "name": "server ttn",
+        "broker": "nam1.cloud.thethings.network",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "bac19918fc4eda28",
+        "type": "mqtt in",
+        "z": "12e532b125237eb5",
+        "name": "Recepcion dht11",
+        "topic": "v3/lorawan-nodes-gridcomd@ttn/devices/nodo-heltec-v2-dht11/up",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "1132bf909125edb0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 380,
+        "wires": [
+            [
+                "0c8f74381a99c757"
+            ]
+        ]
+    },
+    {
+        "id": "535ff05bbdaf48c8",
+        "type": "debug",
+        "z": "12e532b125237eb5",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "0c8f74381a99c757",
+        "type": "function",
+        "z": "12e532b125237eb5",
+        "name": "function 3",
+        "func": "const uplink_msg = msg.payload.uplink_message;\nconst dp = uplink_msg.decoded_payload;\nconst rx_meta = uplink_msg.rx_metadata[0];\n\nmsg.payload = [\n    {\n        temp: dp.temperature,\n        hum: dp.humidity,\n        rssi: rx_meta.rssi,\n        snr: rx_meta.snr,\n        timeStampTTN: msg.payload.received_at  // timestamp de TTN\n        // los campos que tenga tu formatter\n    },\n    {\n        device: msg.payload.end_device_ids.device_id  // como tag\n    }\n];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 400,
+        "wires": [
+            [
+                "535ff05bbdaf48c8",
+                "144ea760056c884d"
+            ]
+        ]
+    },
+    {
+        "id": "7ae773cd4c523e7d",
+        "type": "mqtt in",
+        "z": "12e532b125237eb5",
+        "name": "Recepcion CO2",
+        "topic": "v3/lorawan-nodes-gridcomd@ttn/devices/nodo-heltec-v2-co2/up",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "1132bf909125edb0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 500,
+        "wires": [
+            [
+                "5cc01b5b6128f527"
+            ]
+        ]
+    },
+    {
+        "id": "5cc01b5b6128f527",
+        "type": "function",
+        "z": "12e532b125237eb5",
+        "name": "function 4",
+        "func": "const uplink_msg = msg.payload.uplink_message;\nconst dp = uplink_msg.decoded_payload;\nconst rx_meta = uplink_msg.rx_metadata[0];\nmsg.payload = [\n    {\n        co2: dp.co2_ppm,\n        temp_co2: dp.temperature,\n        rssi: rx_meta.rssi,\n        snr: rx_meta.snr,\n        timeStampTTN: msg.payload.received_at  // timestamp de TTN\n    },\n    {\n        device: msg.payload.end_device_ids.device_id  // como tag\n    }\n    \n];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 500,
+        "wires": [
+            [
+                "2b4161de235c4f82",
+                "ceb204c33d7f5be7"
+            ]
+        ]
+    },
+    {
+        "id": "144ea760056c884d",
+        "type": "influxdb out",
+        "z": "12e532b125237eb5",
+        "influxdb": "b8d94657bc74487c",
+        "name": "Guardar datos dht11 en BD de Influx",
+        "measurement": "dht11",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 820,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "2b4161de235c4f82",
+        "type": "debug",
+        "z": "12e532b125237eb5",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "ceb204c33d7f5be7",
+        "type": "influxdb out",
+        "z": "12e532b125237eb5",
+        "influxdb": "b8d94657bc74487c",
+        "name": "Guardar datos co2 en BD de Influx",
+        "measurement": "co2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 820,
+        "y": 500,
+        "wires": []
+    }
+]
