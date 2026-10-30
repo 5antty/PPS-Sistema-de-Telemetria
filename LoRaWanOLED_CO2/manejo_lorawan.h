@@ -6,6 +6,7 @@
 
 #include "medir_vbat.h"
 #include "manejo_mhz19.h"
+#include "manejo_watchdog.h"
 
 static void prepareTxFrame(uint8_t port);
 void actualizarEstadoLoRaWAN();

@@ -25,6 +25,7 @@
 #include "manejo_lorawan.h"
 #include "medir_vbat.h"
 #include "manejo_dht.h"
+#include "manejo_watchdog.h"
 
 // Variables globales para los datos del sensor
 float temperature = 0.0;
@@ -68,8 +69,17 @@ uint8_t confirmedNbTrials = 4; // Reintentos ante falta de ACK
 // ─── Setup y loop ─────────────────────────────────────────────────────────────
 RTC_DATA_ATTR bool firstrun = true;
 
+// Variables Watchdog para reinicio
+volatile uint32_t sendStartMs = 0; // 0 = guardián desarmado
+RTC_DATA_ATTR uint32_t wdtResets = 0;
+
 void setup()
 {
+
+  // Configurar el watchdog para reiniciar si no se envía un paquete en 30 segundos
+  xTaskCreatePinnedToCore(sendWatchdogTask, "sendWdt", 2048, NULL, 1, NULL, 0);
+
+
   Serial.begin(115200);
 
   analogReadResolution(12);

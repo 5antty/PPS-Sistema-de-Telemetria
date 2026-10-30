@@ -61,9 +61,11 @@ void actualizarEstadoLoRaWAN()
 
     case DEVICE_STATE_SEND:
     {
+        sendStartMs = millis(); // armar
         LoRaWAN.displaySending();
         prepareTxFrame(appPort);
         LoRaWAN.send();
+        sendStartMs = 0; // desarmar
         deviceState = DEVICE_STATE_CYCLE;
         break;
     }

@@ -18,6 +18,7 @@
 #include "manejo_lorawan.h"
 #include "medir_vbat.h"
 #include "manejo_mhz19.h"
+#include "manejo_watchdog.h"
 
 /* OTAA para*/
 
@@ -81,6 +82,10 @@ float temp = 20.0;
 
 RTC_DATA_ATTR bool firstrun = true;
 
+// Variables Watchdog para reinicio
+volatile uint32_t sendStartMs = 0;    // 0 = guardián desarmado
+RTC_DATA_ATTR uint32_t wdtResets=0;
+
 void setup()
 {
   // Serial.begin(115200);
@@ -90,6 +95,10 @@ void setup()
   // myMHZ19.autoCalibration(false); // desactiva ABC; activalo (true) si el sensor va a estar en exterior con ventilación regular
 
   // Configurar UART0 (Serial) exactamente a 9600 baudios (requerido por el MH-Z19C)
+
+  // Configurar el watchdog para reiniciar si no se envía un paquete en 30 segundos
+  xTaskCreatePinnedToCore(sendWatchdogTask, "sendWdt", 2048, NULL, 1, NULL, 0);
+
   Serial.begin(9600);
 
   Mcu.begin(HELTEC_BOARD, SLOW_CLK_TPYE);
