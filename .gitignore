@@ -8,3 +8,4 @@ docker/nodered/data/*
 !docker/nodered/data/flows.json
 
 docker/influxdb/*
+docker/grafana/data/*

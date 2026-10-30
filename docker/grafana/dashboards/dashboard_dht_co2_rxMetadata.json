@@ -4,20 +4,20 @@
   "metadata": {
     "name": "adk42gg",
     "namespace": "default",
-    "uid": "53d2fd16-e6c3-4d20-ac80-77082e471195",
-    "resourceVersion": "1788970598431988",
+    "uid": "15597f57-d9df-4a52-b444-196b71071810",
+    "resourceVersion": "1792600254927000",
     "generation": 1,
-    "creationTimestamp": "2026-09-09T16:16:38Z",
+    "creationTimestamp": "2026-10-21T16:30:54Z",
     "labels": {
-      "grafana.app/deprecatedInternalID": "3547020611350528"
+      "grafana.app/deprecatedInternalID": "756504849743872"
     },
     "annotations": {
       "grafana.app/createdBy": "access-policy:service",
       "grafana.app/managedBy": "classic-file-provisioning",
       "grafana.app/managerId": "Dashboards IoT-Practica2",
-      "grafana.app/sourceChecksum": "1c184cc92836b1d48aeebc2c5ec5b491",
-      "grafana.app/sourcePath": "/mis-dashboards/dashboard_dht11_co2.json",
-      "grafana.app/sourceTimestamp": "1788952641000",
+      "grafana.app/sourceChecksum": "c8aa563f5428c8c35ab3a574972984c4",
+      "grafana.app/sourcePath": "/etc/grafana/dashboards/dashboard_dht_co2_rxMetadata.json",
+      "grafana.app/sourceTimestamp": "1788974926000",
       "grafana.app/folder": ""
     }
   },
@@ -455,6 +455,220 @@
           }
         }
       },
+      "panel-12": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "cfxr01io71w5cc"
+                      },
+                      "group": "influxdb",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "query": "SELECT mean(\"vbat\") FROM \"dht11\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+                        "rawQuery": true,
+                        "resultFormat": "time_series"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 12,
+          "links": [],
+          "title": "Nodo DHT11",
+          "vizConfig": {
+            "group": "gauge",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 3,
+                  "max": 4.2,
+                  "min": 3,
+                  "thresholds": {
+                    "mode": "percentage",
+                    "steps": [
+                      {
+                        "color": "semi-dark-red",
+                        "value": 0
+                      },
+                      {
+                        "color": "orange",
+                        "value": 30
+                      },
+                      {
+                        "color": "#EAB839",
+                        "value": 60
+                      },
+                      {
+                        "color": "green",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "volt"
+                },
+                "overrides": []
+              },
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.54,
+                "effects": {
+                  "barGlow": true,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "segmentCount": 48,
+                "segmentSpacing": 0.67,
+                "shape": "gauge",
+                "showThresholdLabels": true,
+                "showThresholdMarkers": true,
+                "sizing": "auto",
+                "sparkline": false,
+                "text": {},
+                "textMode": "auto"
+              }
+            },
+            "version": "13.1.0"
+          }
+        }
+      },
+      "panel-13": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "cfxr01io71w5cc"
+                      },
+                      "group": "influxdb",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "query": "SELECT mean(\"vbat\") FROM \"co2\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+                        "rawQuery": true,
+                        "resultFormat": "time_series"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 13,
+          "links": [],
+          "title": "Nodo MHZ19",
+          "vizConfig": {
+            "group": "gauge",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 3,
+                  "max": 4.2,
+                  "min": 3,
+                  "thresholds": {
+                    "mode": "percentage",
+                    "steps": [
+                      {
+                        "color": "semi-dark-red",
+                        "value": 0
+                      },
+                      {
+                        "color": "orange",
+                        "value": 30
+                      },
+                      {
+                        "color": "#EAB839",
+                        "value": 60
+                      },
+                      {
+                        "color": "green",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "volt"
+                },
+                "overrides": []
+              },
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.54,
+                "effects": {
+                  "barGlow": true,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "segmentCount": 48,
+                "segmentSpacing": 0.67,
+                "shape": "gauge",
+                "showThresholdLabels": true,
+                "showThresholdMarkers": true,
+                "sizing": "auto",
+                "sparkline": false,
+                "text": {},
+                "textMode": "auto"
+              }
+            },
+            "version": "13.1.0"
+          }
+        }
+      },
       "panel-2": {
         "kind": "Panel",
         "spec": {
@@ -537,6 +751,8 @@
                     "axisColorMode": "text",
                     "axisLabel": "",
                     "axisPlacement": "auto",
+                    "axisSoftMax": 45,
+                    "axisSoftMin": 0,
                     "barAlignment": 0,
                     "barWidthFactor": 0.6,
                     "drawStyle": "line",
@@ -669,6 +885,8 @@
                     "axisColorMode": "text",
                     "axisLabel": "",
                     "axisPlacement": "auto",
+                    "axisSoftMax": 100,
+                    "axisSoftMin": 0,
                     "barAlignment": 0,
                     "barWidthFactor": 0.6,
                     "drawStyle": "line",
@@ -811,7 +1029,7 @@
           "description": "",
           "id": 4,
           "links": [],
-          "title": "Ultimas medidas",
+          "title": "Ultimas medidas MHZ19",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -990,6 +1208,8 @@
                     "axisColorMode": "text",
                     "axisLabel": "",
                     "axisPlacement": "auto",
+                    "axisSoftMax": 2000,
+                    "axisSoftMin": 0,
                     "barAlignment": 0,
                     "barWidthFactor": 0.6,
                     "drawStyle": "line",
@@ -1173,8 +1393,8 @@
               },
               "options": {
                 "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
+                "graphMode": "none",
+                "justifyMode": "center",
                 "orientation": "auto",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
@@ -1238,6 +1458,7 @@
                   "color": {
                     "mode": "thresholds"
                   },
+                  "fieldMinMax": false,
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -1296,8 +1517,8 @@
               },
               "options": {
                 "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
+                "graphMode": "none",
+                "justifyMode": "center",
                 "orientation": "auto",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
@@ -1734,6 +1955,45 @@
                 }
               },
               "title": "Metadatos de RX"
+            }
+          },
+          {
+            "kind": "TabsLayoutTab",
+            "spec": {
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-12"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-13"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 12,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Baterias"
             }
           }
         ]

@@ -1,5 +1,4 @@
 apiVersion: 1
-
 providers:
   - name: "Dashboards IoT-Practica2"
     orgId: 1
@@ -8,4 +7,4 @@ providers:
     disableDeletion: false
     editable: true
     options:
-      path: /mis-dashboards # El contenedor va a buscar los JSONs acá adentro
+      path: /etc/grafana/dashboards

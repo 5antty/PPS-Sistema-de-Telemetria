@@ -46,12 +46,14 @@ services:
     ports:
       - "3000:3000"
     volumes:
-    # - ./grafana/data:/var/lib/grafana
+      - ./grafana/data:/var/lib/grafana
     # --- CONFIGURACIÓN SIMPLIFICADA ---
       # Metemos el archivo de configuración directo en el provisioning de Grafana
-      - ./dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
+      #- ./dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
       # Metemos tu carpeta de JSONs en la ruta corta que inventamos arriba
-      - ./grafana:/mis-dashboards
+      #- ./grafana:/mis-dashboards
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/etc/grafana/dashboards
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin

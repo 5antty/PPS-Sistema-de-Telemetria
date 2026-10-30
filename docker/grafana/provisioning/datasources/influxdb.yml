@@ -1,0 +1,15 @@
+apiVersion: 1
+datasources:
+  - name: InfluxDB
+    uid: cfxr01io71w5cc # el mismo UID que piden tus paneles
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    database: sensores
+    isDefault: true
+    jsonData:
+      httpMode: GET # modo de consulta InfluxQL
+    # Si tu Influx tiene autenticación:
+    user: admin
+    # secureJsonData:
+    password: admin123
